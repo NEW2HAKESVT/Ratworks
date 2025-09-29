@@ -21,9 +21,8 @@
       font-family: 'Creepster', cursive;
       color: #ff7518;
 
-      /* Background with fallback */
       background-color: black;
-      background-image: url('background.jpg'); /* looks in the same folder as index.html */
+      background-image: url('background.jpg'); /* same folder as index.html */
       background-repeat: no-repeat;
       background-position: center;
       background-size: cover;
@@ -45,7 +44,7 @@
 
     /* Thank you message */
     #thankYouMsg {
-      display: none; /* hidden until countdown ends */
+      display: none;
       margin-bottom: 20px;
       padding: 10px 20px;
       font-size: 1.3rem;
@@ -64,7 +63,6 @@
       gap: 10px;
     }
 
-    /* Small YouTube & Discord buttons */
     .top-buttons a {
       text-decoration: none;
       color: black;
@@ -83,7 +81,6 @@
       transform: scale(1.1);
     }
 
-    /* Play Now! bigger and hidden initially */
     #playNowBtn {
       display: none;
       margin-top: 20px;
@@ -102,6 +99,20 @@
     #playNowBtn:hover {
       background-color: #ff4500;
       transform: scale(1.1);
+    }
+
+    /* troubleshooting message */
+    #bgError {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: red;
+      font-size: 1rem;
+      background: rgba(0,0,0,0.7);
+      padding: 5px 10px;
+      border-radius: 6px;
+      display: none;
     }
   </style>
 </head>
@@ -126,14 +137,17 @@
   <!-- Play Now button -->
   <a id="playNowBtn" href="https://www.roblox.com/" target="_blank">Play Now!</a>
 
+  <!-- Troubleshooting message -->
+  <div id="bgError">❌ Background image NOT found! Check filename and path.</div>
+
   <script>
     // Countdown target date: 30 September 2025 at midnight UK time
-    const targetDate = new Date(Date.UTC(2025, 8, 30, 23, 0, 0)).getTime(); 
-    // Note: months are 0-based (8 = September)
+    const targetDate = new Date(Date.UTC(2025, 8, 30, 23, 0, 0)).getTime();
 
     const countdownEl = document.getElementById("countdown");
     const playNowBtn = document.getElementById("playNowBtn");
     const thankYouMsg = document.getElementById("thankYouMsg");
+    const bgError = document.getElementById("bgError");
 
     function updateCountdown() {
       const now = new Date().getTime();
@@ -160,7 +174,19 @@
 
     setInterval(updateCountdown, 1000);
     updateCountdown();
+
+    // Background troubleshooting
+    const testImg = new Image();
+    testImg.src = "background.jpg";
+    testImg.onload = () => {
+      console.log("✅ Background image loaded successfully.");
+    };
+    testImg.onerror = () => {
+      console.error("❌ Background image NOT found! Check filename and path.");
+      bgError.style.display = "block";
+    };
   </script>
 </body>
 </html>
+
 
