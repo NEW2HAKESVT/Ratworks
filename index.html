@@ -1,156 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Halloween Update Countdown</title>
-<link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet">
-<style>
-  body {
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    font-family: 'Creepster', cursive;
-    color: #ff7518;
-    background-color: black;
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Halloween Update Countdown</title>
+  
+  <!-- Google Fonts spooky font -->
+  <link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet">
 
-    /* ✅ Now loads image from same folder as index.html */
-    background-image: url('background.jpg');
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    position: relative;
-  }
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      font-family: 'Creepster', cursive;
+      color: #ff7518;
 
-  h1 {
-    font-size: 3rem;
-    margin-bottom: 10px;
-    text-shadow: 3px 3px 8px black, 0 0 20px #ff7518;
-  }
+      /* Background with fallback */
+      background-color: black;
+      background-image: url('background.jpg'); /* looks in the same folder as index.html */
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+      position: relative;
+    }
 
-  #countdown {
-    font-size: 5rem;
-    text-shadow: 0 0 10px #ff7518, 0 0 20px #ff4500, 0 0 30px #ff7518, 0 0 40px black;
-    min-height: 1em;
-    margin-bottom: 20px;
-  }
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      text-shadow: 3px 3px 8px black, 0 0 20px #ff7518;
+    }
 
-  #thankYouMsg {
-    display: none;
-    margin-bottom: 20px;
-    padding:10px 20px;
-    font-size:1.3rem;
-    background-color: rgba(0,0,0,0.7);
-    border-radius:10px;
-    line-height:1.4;
-    max-width:600px;
-    text-align:center;
-  }
+    #countdown {
+      font-size: 5rem;
+      text-shadow: 0 0 10px #ff7518, 0 0 20px #ff4500, 0 0 30px #ff7518, 0 0 40px black;
+      min-height: 1em;
+      margin-bottom: 20px;
+    }
 
-  .top-buttons {
-    position:absolute;
-    top:20px;
-    right:20px;
-    display:flex;
-    gap:10px;
-  }
+    /* Thank you message */
+    #thankYouMsg {
+      display: none; /* hidden until countdown ends */
+      margin-bottom: 20px;
+      padding: 10px 20px;
+      font-size: 1.3rem;
+      background-color: rgba(0,0,0,0.7);
+      border-radius: 10px;
+      line-height: 1.4;
+      max-width: 600px;
+      text-align: center;
+    }
 
-  .top-buttons a {
-    text-decoration:none;
-    color:black;
-    background-color:#ff7518;
-    padding:10px 20px;
-    border-radius:8px;
-    font-family:'Creepster', cursive;
-    font-size:1rem;
-    text-align:center;
-    transition:all 0.2s;
-    cursor:pointer;
-  }
+    .top-buttons {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      display: flex;
+      gap: 10px;
+    }
 
-  .top-buttons a:hover { 
-    background-color:#ff4500; 
-    transform:scale(1.1); 
-  }
+    /* Small YouTube & Discord buttons */
+    .top-buttons a {
+      text-decoration: none;
+      color: black;
+      background-color: #ff7518;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-family: 'Creepster', cursive;
+      font-size: 1rem;
+      text-align: center;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
 
-  #playNowBtn {
-    display:none;
-    margin-top:20px;
-    padding:15px 30px;
-    font-size:1.3rem;
-    text-decoration:none;
-    color:black;
-    background-color:#ff7518;
-    border-radius:10px;
-    font-family:'Creepster', cursive;
-    text-align:center;
-    transition:all 0.2s;
-    cursor:pointer;
-  }
+    .top-buttons a:hover {
+      background-color: #ff4500;
+      transform: scale(1.1);
+    }
 
-  #playNowBtn:hover { 
-    background-color:#ff4500; 
-    transform:scale(1.1); 
-  }
-</style>
+    /* Play Now! bigger and hidden initially */
+    #playNowBtn {
+      display: none;
+      margin-top: 20px;
+      padding: 15px 30px;
+      font-size: 1.3rem;
+      text-decoration: none;
+      color: black;
+      background-color: #ff7518;
+      border-radius: 10px;
+      font-family: 'Creepster', cursive;
+      text-align: center;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+
+    #playNowBtn:hover {
+      background-color: #ff4500;
+      transform: scale(1.1);
+    }
+  </style>
 </head>
 <body>
+  <!-- Top-right buttons -->
   <div class="top-buttons">
     <a href="https://www.youtube.com/" target="_blank">YouTube</a>
     <a href="https://discord.com/" target="_blank">Discord</a>
   </div>
 
   <h1>Halloween Update</h1>
-  <div id="countdown"></div>
 
+  <!-- Thank you message -->
   <div id="thankYouMsg">
     Thanks for sticking around for the countdown!<br>
     Here's a thank you! Use the code: <strong>SpookySeason2025</strong> to get a free item and some cash!<br>
     Use within 10 minutes of the countdown hitting 0!
   </div>
 
+  <div id="countdown"></div>
+
+  <!-- Play Now button -->
   <a id="playNowBtn" href="https://www.roblox.com/" target="_blank">Play Now!</a>
 
   <script>
-    function getUKMidnight() {
-      // UK midnight 30 Sep 2025 = 23:00 UTC 29 Sep 2025 (BST)
-      return Date.UTC(2025, 8, 29, 23, 0, 0);
-    }
+    // Countdown target date: 30 September 2025 at midnight UK time
+    const targetDate = new Date(Date.UTC(2025, 8, 30, 23, 0, 0)).getTime(); 
+    // Note: months are 0-based (8 = September)
 
-    const targetUTCms = getUKMidnight();
     const countdownEl = document.getElementById("countdown");
     const playNowBtn = document.getElementById("playNowBtn");
     const thankYouMsg = document.getElementById("thankYouMsg");
 
     function updateCountdown() {
-      const now = Date.now();
-      const distance = targetUTCms - now;
+      const now = new Date().getTime();
+      const distance = targetDate - now;
 
       if (distance <= 0) {
         countdownEl.textContent = "🎃 Update Released! 👻";
         playNowBtn.style.display = "inline-block";
         thankYouMsg.style.display = "block";
+        return;
+      }
+
+      const days = Math.floor(distance / (1000*60*60*24));
+      const hours = Math.floor((distance % (1000*60*60*24)) / (1000*60*60));
+      const minutes = Math.floor((distance % (1000*60*60)) / (1000*60));
+      const seconds = Math.floor((distance % (1000*60)) / 1000);
+
+      if (days > 0) {
+        countdownEl.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
       } else {
-        let totalSec = Math.floor(distance / 1000);
-        const hrs = Math.floor(totalSec / 3600);
-        totalSec %= 3600;
-        const mins = Math.floor(totalSec / 60);
-        const secs = totalSec % 60;
-        countdownEl.textContent = `${hrs}h ${mins}m ${secs}s`;
+        countdownEl.textContent = `${hours}h ${minutes}m ${seconds}s`;
       }
     }
 
     setInterval(updateCountdown, 1000);
     updateCountdown();
   </script>
-</body>
-</html>
-
 </body>
 </html>
 
