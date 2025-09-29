@@ -18,7 +18,9 @@
     font-family: 'Creepster', cursive;
     color: #ff7518;
     background-color: black;
-    background-image: url('../images/background.jpg');
+
+    /* ✅ Now loads image from same folder as index.html */
+    background-image: url('background.jpg');
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -117,7 +119,7 @@
   <script>
     function getUKMidnight() {
       // UK midnight 30 Sep 2025 = 23:00 UTC 29 Sep 2025 (BST)
-      return Date.UTC(2025, 9, 30, 23, 0, 0);
+      return Date.UTC(2025, 8, 29, 23, 0, 0);
     }
 
     const targetUTCms = getUKMidnight();
@@ -148,3 +150,7 @@
   </script>
 </body>
 </html>
+
+</body>
+</html>
+
